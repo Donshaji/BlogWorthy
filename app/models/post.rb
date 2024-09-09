@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Post < ApplicationRecord
   # Validate the presence and length of the title
   validates :title, presence: true, length: { maximum: 125 }
@@ -10,10 +12,10 @@ class Post < ApplicationRecord
 
   private
 
-  # Custom validation method to ensure net vote is not negative
-  def net_vote_cannot_be_negative
-    if upvotes - downvotes < 0
-      errors.add(:base, "Net vote cannot be negative")
+    # Custom validation method to ensure net vote is not negative
+    def net_vote_cannot_be_negative
+      if upvotes - downvotes < 0
+        errors.add(:base, "Net vote cannot be negative")
+      end
     end
-  end
 end
