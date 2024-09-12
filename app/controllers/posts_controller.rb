@@ -15,6 +15,6 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:title)
+      params.require(:post).permit(:title, :description, :upvotes, :downvotes, :is_blog_worthy)
     end
 end

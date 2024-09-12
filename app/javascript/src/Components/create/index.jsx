@@ -1,5 +1,7 @@
 import React from "react";
 
+import Create from "./Create";
+
 import { Header, Sidebar } from "../common";
 
 const Post = () => (
@@ -8,8 +10,10 @@ const Post = () => (
     <div className="ml-28 flex w-full flex-col">
       {" "}
       {/* Ensure content starts after the sidebar */}
-      <Header buttonText="Create New Post" heading="Blog" />
-      <main className="flex-grow p-6 pt-20"> </main>
+      <Header buttonText="View All Posts" heading="Blog" />
+      <main className="flex-grow p-6 pt-20">
+        <Create />
+      </main>
     </div>
   </div>
 );

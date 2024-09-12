@@ -1,45 +1,65 @@
 import React, { useState } from "react";
 
-const Create = ({ title, description }) => {
+import { Button, Input, Textarea } from "@bigbinary/neetoui";
+import { useHistory } from "react-router-dom";
+
+import postsApi from "apis/Posts";
+
+const Create = () => {
   const [formData, setFormData] = useState({
-    title: title || "",
-    description: description || "",
+    title: "",
+    description: "",
+    upvotes: 5,
+    downvotes: 2,
+    is_blog_worthy: true,
   });
 
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
   const handleChange = event => {
-    const { name, value } = event.target;
+    const { name, value, checked } = event.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: name === "is_blog_worthy" ? checked : value,
     });
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    // Handle form submission here (e.g., send data to an API)
-
-    // eslint-disable-next-line no-console
-    console.log(formData);
+    setLoading(true);
+    try {
+      await postsApi.create({ ...formData });
+      setLoading(false);
+      history.push("/main");
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Title:</label>
-      <input
+      <Input
+        label="Title"
         name="title"
         type="text"
         value={formData.title}
         onChange={handleChange}
       />
       <br />
-      <label>Description:</label>
-      <textarea
+      <Textarea
+        label="Description"
         name="description"
+        placeholder="Post Content"
         value={formData.description}
         onChange={handleChange}
       />
       <br />
-      <button type="submit">Submit</button>
+      <Button loading={loading} type="submit">
+        Submit
+      </Button>
     </form>
   );
 };
