@@ -10,7 +10,7 @@ const Post = () => (
     <div className="ml-28 flex w-full flex-col">
       {" "}
       {/* Ensure content starts after the sidebar */}
-      <Header buttonText="Create New Post" heading="Blog" />
+      <Header buttonText="Create New Post" heading="Blog" slug="/main/create" />
       <main className="flex-grow p-6 pt-20">
         {" "}
         <Dashboard />

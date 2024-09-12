@@ -57,6 +57,7 @@ const Dashboard = () => {
           content={post.description}
           downvotes={post.downvotes}
           key={post.id}
+          slug={post.slug}
           title={post.title}
           upvotes={post.upvotes}
         />
