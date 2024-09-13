@@ -47,7 +47,7 @@ const Show = () => {
         <main className="flex-grow p-6 pt-20">
           {" "}
           <Card
-            author=""
+            author={post?.post_owner?.name}
             content={post.description}
             downvotes={post.downvotes}
             title={post.title}

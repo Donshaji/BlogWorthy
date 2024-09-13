@@ -53,7 +53,7 @@ const Dashboard = () => {
     <>
       {posts.map(post => (
         <Card
-          // author={post.author}
+          author={post?.post_owner?.name}
           content={post.description}
           downvotes={post.downvotes}
           key={post.id}

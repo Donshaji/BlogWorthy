@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
+  belongs_to :post_owner, foreign_key: "post_owner_id", class_name: "User"
   # Validate the presence and length of the title
   validates :title, presence: true, length: { maximum: 125 }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_13_054554) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_13_084228) do
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_13_054554) do
     t.datetime "updated_at", null: false
     t.string "slug", null: false
     t.integer "assigned_user_id"
+    t.integer "post_owner_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 
@@ -35,4 +36,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_13_054554) do
   end
 
   add_foreign_key "posts", "users", column: "assigned_user_id"
+  add_foreign_key "posts", "users", column: "post_owner_id", on_delete: :cascade
 end

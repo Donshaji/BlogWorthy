@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(post_params)
+    post = current_user.created_posts.new(post_params)
     post.save!
     render_notice("Post was successfully created")
   end

@@ -8,4 +8,9 @@ json.post do
   json.downvotes @post.downvotes
   json.is_blog_worthy @post.is_blog_worthy
   json.slug @post.slug
+
+  json.post_owner do
+    json.extract! @post.post_owner,
+      :name
+  end
 end
