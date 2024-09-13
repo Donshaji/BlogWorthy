@@ -1,7 +1,8 @@
 import axios from "axios";
 
-import { Toastr } from "components/common";
 import { setToLocalStorage, getFromLocalStorage } from "utils/storage";
+
+import { Toastr } from "../Components/common";
 
 const DEFAULT_ERROR_NOTIFICATION = "Something went wrong!";
 
@@ -56,4 +57,9 @@ const registerIntercepts = () => {
   );
 };
 
-export { setAuthHeaders, registerIntercepts };
+const resetAuthTokens = () => {
+  delete axios.defaults.headers["X-Auth-Email"];
+  delete axios.defaults.headers["X-Auth-Token"];
+};
+
+export { setAuthHeaders, registerIntercepts, resetAuthTokens };
