@@ -1,65 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Button, Input } from "@bigbinary/neetoui";
-import { Link } from "react-router-dom";
+import authApi from "apis/auth";
 
-const Signup = ({
-  handleSubmit,
-  setName,
-  setEmail,
-  setPassword,
-  loading,
-  setPasswordConfirmation,
-}) => (
-  <div
-    className="flex min-h-screen items-center justify-center bg-gray-50
-    px-4 py-12 sm:px-6 lg:px-8 "
-  >
-    <div className="w-full max-w-md">
-      <h2
-        className="mt-6 text-center text-3xl font-extrabold
-        leading-9 text-gray-700"
-      >
-        Sign Up
-      </h2>
-      <div className="text-center">
-        <Link
-          to="/"
-          className="focus:outline-none mt-2 text-center
-            text-sm font-medium transition duration-150
-            ease-in-out focus:underline"
-        >
-          Or Login Now
-        </Link>
-      </div>
-      <form className="mt-8 flex flex-col gap-y-6" onSubmit={handleSubmit}>
-        <Input
-          label="Name"
-          placeholder="Oliver"
-          onChange={e => setName(e.target.value)}
-        />
-        <Input
-          label="Email"
-          placeholder="oliver@example.com"
-          type="email"
-          onChange={e => setEmail(e.target.value)}
-        />
-        <Input
-          label="Password"
-          placeholder="********"
-          type="password"
-          onChange={e => setPassword(e.target.value)}
-        />
-        <Input
-          label="Password Confirmation"
-          placeholder="********"
-          type="password"
-          onChange={e => setPasswordConfirmation(e.target.value)}
-        />
-        <Button label="Register" loading={loading} type="submit" />
-      </form>
-    </div>
-  </div>
-);
+import SignupForm from "./Form/Signup";
+
+const Signup = ({ history }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      await authApi.signup({
+        name,
+        email,
+        password,
+        password_confirmation: passwordConfirmation,
+      });
+      setLoading(false);
+      history.push("/dashboard");
+    } catch (error) {
+      logger.error(error);
+      setLoading(false);
+    }
+  };
+
+  return (
+    <SignupForm
+      handleSubmit={handleSubmit}
+      loading={loading}
+      setEmail={setEmail}
+      setName={setName}
+      setPassword={setPassword}
+      setPasswordConfirmation={setPasswordConfirmation}
+    />
+  );
+};
 
 export default Signup;

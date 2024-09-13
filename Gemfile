@@ -81,3 +81,7 @@ gem "shakapacker", "~> 6.6.0"
 gem "responders"
 
 gem "rexml", "3.3.5"
+
+gem "pundit"
+
+gem "bcrypt", "~> 3.1.13"
