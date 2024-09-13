@@ -43,7 +43,11 @@ const Show = () => {
       <div className="ml-28 flex w-full flex-col">
         {" "}
         {/* Ensure content starts after the sidebar */}
-        <Header buttonText="View All Posts" heading="Blog" slug="/main" />
+        <Header
+          buttonText="View All Posts"
+          heading={`Blog - ${post.title}`}
+          slug="/main"
+        />
         <main className="flex-grow p-6 pt-20">
           {" "}
           <Card

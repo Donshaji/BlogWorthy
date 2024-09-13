@@ -30,7 +30,12 @@ const Login = ({ handleSubmit, setEmail, setPassword, loading }) => (
           type="password"
           onChange={e => setPassword(e.target.value)}
         />
-        <Button label="Sign In" loading={loading} type="submit" />
+        <Button
+          className="rounded-md bg-blue-500 text-white"
+          label="Sign In"
+          loading={loading}
+          type="submit"
+        />
       </form>
     </div>
   </div>

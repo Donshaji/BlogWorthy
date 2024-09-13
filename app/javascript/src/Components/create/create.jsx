@@ -9,8 +9,8 @@ const Create = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    upvotes: 5,
-    downvotes: 2,
+    upvotes: 0,
+    downvotes: 0,
     is_blog_worthy: true,
   });
 

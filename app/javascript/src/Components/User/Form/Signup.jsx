@@ -56,7 +56,12 @@ const Signup = ({
           type="password"
           onChange={e => setPasswordConfirmation(e.target.value)}
         />
-        <Button label="Register" loading={loading} type="submit" />
+        <Button
+          className="rounded-md bg-blue-500 text-white"
+          label="Register"
+          loading={loading}
+          type="submit"
+        />
       </form>
     </div>
   </div>

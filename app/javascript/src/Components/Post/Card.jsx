@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Up, Down } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui";
 import { useHistory } from "react-router-dom";
 
@@ -25,22 +24,22 @@ const Card = ({ title, author, content, upvotes, downvotes, slug }) => {
       <div className="mt-4 flex items-center justify-end">
         <Button
           className="flex-column flex items-center rounded-full bg-green-300 p-2"
+          label="UpVotes"
           onClick={e => {
             e.stopPropagation(); // Prevent navigation
             e.preventDefault(); // Prevent default button behavior
           }}
         >
-          <Up className="text-green-700" />
-          <span>{upvotes}</span>
+          {upvotes}
         </Button>
         <Button
           className="flex-column ml-2 flex items-center rounded-full bg-red-300 p-2"
+          label="DownVotes"
           onClick={e => {
             e.stopPropagation(); // Prevent navigation
             e.preventDefault(); // Prevent default button behavior
           }}
         >
-          <Down className="text-red-700" />
           <span>{downvotes}</span>
         </Button>
       </div>
