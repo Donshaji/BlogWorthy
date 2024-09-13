@@ -1,39 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Button, Input } from "@bigbinary/neetoui";
-import { Link } from "react-router-dom";
+import authApi from "apis/auth";
+import { setAuthHeaders } from "apis/axios";
+import { setToLocalStorage } from "utils/storage";
 
-const Login = ({ handleSubmit, setEmail, setPassword, loading }) => (
-  <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
-    <div className="w-full max-w-md">
-      <h2 className="mt-6 text-center text-3xl font-extrabold leading-9 text-gray-700">
-        Sign In
-      </h2>
-      <div className="text-center">
-        <Link
-          className="focus:outline-none mt-2 text-sm font-medium text-indigo-500 transition duration-150 ease-in-out focus:underline"
-          to="/signup"
-        >
-          Or Register Now
-        </Link>
-      </div>
-      <form className="mt-8 flex flex-col gap-y-6" onSubmit={handleSubmit}>
-        <Input
-          label="Email"
-          placeholder="oliver@example.com"
-          type="email"
-          onChange={e => setEmail(e.target.value)}
-        />
-        <Input
-          label="Password"
-          placeholder="********"
-          type="password"
-          onChange={e => setPassword(e.target.value)}
-        />
-        <Button label="Sign In" loading={loading} type="submit" />
-      </form>
-    </div>
-  </div>
-);
+import LoginForm from "./Form/Login";
+
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      const response = await authApi.login({ email, password });
+      setToLocalStorage({
+        authToken: response.data.authentication_token,
+        email: email.toLowerCase(),
+        userId: response.data.id,
+        userName: response.data.name,
+      });
+      setAuthHeaders();
+      window.location.href = "/";
+    } catch (error) {
+      logger.error(error);
+      setLoading(false);
+    }
+  };
+
+  return (
+    <LoginForm
+      handleSubmit={handleSubmit}
+      loading={loading}
+      setEmail={setEmail}
+      setPassword={setPassword}
+    />
+  );
+};
 
 export default Login;

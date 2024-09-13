@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 import postsApi from "apis/posts";
 import { PageLoader, Sidebar, Header } from "components/common";
+import { getFromLocalStorage } from "utils/storage";
 
 import Card from "./Card";
 
@@ -12,6 +13,8 @@ const Show = () => {
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
   const history = useHistory();
+
+  const userName = getFromLocalStorage("authUserName");
 
   const fetchPostDetails = async () => {
     try {
@@ -36,7 +39,7 @@ const Show = () => {
 
   return (
     <div className="flex h-screen">
-      <Sidebar username="John Doe" />
+      <Sidebar username={userName} />
       <div className="ml-28 flex w-full flex-col">
         {" "}
         {/* Ensure content starts after the sidebar */}
